@@ -9,6 +9,7 @@
 #import "Worker.h"
 
 #import "DataItem.h"
+#import "NSManagedObject+NMInstantiation.h"
 
 
 @implementation Worker
@@ -21,7 +22,7 @@
 	
 	for (NSInteger i = startIndex; i <= endIndex; i++) {
 		// insert and customize a new data item
-		DataItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"DataItem" inManagedObjectContext:context];
+		DataItem *item = [DataItem newObjectInContext:context];
 		
 		item.title = [NSString stringWithFormat:@"Item %d", i];
 		item.content = [NSString stringWithFormat:@"Content %d", i];
@@ -29,8 +30,8 @@
 		[NSThread sleepForTimeInterval:0.5];
 		
 		// save the context after every 100 inserts
+		NSError *error;
 		if (i % 10 == 0) {
-			NSError *error;
 			if (![context save:&error]) {
 				NSLog(@"error creating saving context in worker '%@'. error: %@", self, error);
 			} else {

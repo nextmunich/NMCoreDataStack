@@ -15,6 +15,8 @@
 		43169B0F136611DF00AA7FD0 /* FetchesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43169B0D136611DF00AA7FD0 /* FetchesController.m */; };
 		43169B10136611DF00AA7FD0 /* FetchesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43169B0E136611DF00AA7FD0 /* FetchesController.xib */; };
 		43169B4B1366288800AA7FD0 /* Worker.m in Sources */ = {isa = PBXBuildFile; fileRef = 43169B4A1366288800AA7FD0 /* Worker.m */; };
+		43AAA3D81372CAA80030E63E /* DataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAA3D61372CAA80030E63E /* DataItem.m */; };
+		43AAA3E21372CCD80030E63E /* NSManagedObject+NMInstantiation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43AAA3E11372CCD80030E63E /* NSManagedObject+NMInstantiation.m */; };
 		43BABBEC1281EADD00F8445F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BABBEB1281EADD00F8445F /* SystemConfiguration.framework */; };
 		43DF9D5C130C8E2C00F758D1 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DF9D56130C8E2C00F758D1 /* Icon-Small-50.png */; };
 		43DF9D5D130C8E2C00F758D1 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DF9D57130C8E2C00F758D1 /* Icon-Small.png */; };
@@ -29,7 +31,6 @@
 		43E152C81358D8C400B34EA8 /* NMCoreDataFetchOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E152C71358D8C400B34EA8 /* NMCoreDataFetchOperation.m */; };
 		43E152CB1358D99700B34EA8 /* NMCoreDataWorkerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E152CA1358D99700B34EA8 /* NMCoreDataWorkerOperation.m */; };
 		43E153091358DD0600B34EA8 /* SampleModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 43E153081358DD0600B34EA8 /* SampleModel.xcdatamodel */; };
-		43E1532E1358DF3600B34EA8 /* DataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E1532D1358DF3600B34EA8 /* DataItem.m */; };
 		43E153331358DF7900B34EA8 /* WorkersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E153311358DF7900B34EA8 /* WorkersController.m */; };
 		43E153341358DF7900B34EA8 /* WorkersController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43E153321358DF7900B34EA8 /* WorkersController.xib */; };
 		43F01E2811D38304001C4390 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43F01E2611D382D2001C4390 /* MainWindow.xib */; };
@@ -49,6 +50,10 @@
 		43169B0E136611DF00AA7FD0 /* FetchesController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FetchesController.xib; sourceTree = "<group>"; };
 		43169B491366288800AA7FD0 /* Worker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Worker.h; sourceTree = "<group>"; };
 		43169B4A1366288800AA7FD0 /* Worker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Worker.m; sourceTree = "<group>"; };
+		43AAA3D51372CAA80030E63E /* DataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataItem.h; sourceTree = "<group>"; };
+		43AAA3D61372CAA80030E63E /* DataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataItem.m; sourceTree = "<group>"; };
+		43AAA3E01372CCD80030E63E /* NSManagedObject+NMInstantiation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+NMInstantiation.h"; sourceTree = "<group>"; };
+		43AAA3E11372CCD80030E63E /* NSManagedObject+NMInstantiation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+NMInstantiation.m"; sourceTree = "<group>"; };
 		43BABBEB1281EADD00F8445F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		43DF9D56130C8E2C00F758D1 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		43DF9D57130C8E2C00F758D1 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -68,8 +73,6 @@
 		43E152CA1358D99700B34EA8 /* NMCoreDataWorkerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMCoreDataWorkerOperation.m; sourceTree = "<group>"; };
 		43E152D61358DB1700B34EA8 /* NMCoreDataStack+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMCoreDataStack+Private.h"; sourceTree = "<group>"; };
 		43E153081358DD0600B34EA8 /* SampleModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = SampleModel.xcdatamodel; sourceTree = "<group>"; };
-		43E1532C1358DF3600B34EA8 /* DataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataItem.h; sourceTree = "<group>"; };
-		43E1532D1358DF3600B34EA8 /* DataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataItem.m; sourceTree = "<group>"; };
 		43E153301358DF7900B34EA8 /* WorkersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkersController.h; sourceTree = "<group>"; };
 		43E153311358DF7900B34EA8 /* WorkersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkersController.m; sourceTree = "<group>"; };
 		43E153321358DF7900B34EA8 /* WorkersController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkersController.xib; sourceTree = "<group>"; };
@@ -242,6 +245,8 @@
 				43E1529F1358CA5100B34EA8 /* NMCoreDataStack.m */,
 				43E152A21358CA6100B34EA8 /* NMCoreDataUtilities.h */,
 				43E152A11358CA6100B34EA8 /* NMCoreDataUtilities.m */,
+				43AAA3E01372CCD80030E63E /* NSManagedObject+NMInstantiation.h */,
+				43AAA3E11372CCD80030E63E /* NSManagedObject+NMInstantiation.m */,
 			);
 			path = NMCoreDataStack;
 			sourceTree = "<group>";
@@ -260,8 +265,8 @@
 		43E153071358DCF200B34EA8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				43E1532C1358DF3600B34EA8 /* DataItem.h */,
-				43E1532D1358DF3600B34EA8 /* DataItem.m */,
+				43AAA3D51372CAA80030E63E /* DataItem.h */,
+				43AAA3D61372CAA80030E63E /* DataItem.m */,
 				43E153081358DD0600B34EA8 /* SampleModel.xcdatamodel */,
 			);
 			name = Model;
@@ -356,10 +361,11 @@
 				43E152C81358D8C400B34EA8 /* NMCoreDataFetchOperation.m in Sources */,
 				43E152CB1358D99700B34EA8 /* NMCoreDataWorkerOperation.m in Sources */,
 				43E153091358DD0600B34EA8 /* SampleModel.xcdatamodel in Sources */,
-				43E1532E1358DF3600B34EA8 /* DataItem.m in Sources */,
 				43E153331358DF7900B34EA8 /* WorkersController.m in Sources */,
 				43169B0F136611DF00AA7FD0 /* FetchesController.m in Sources */,
 				43169B4B1366288800AA7FD0 /* Worker.m in Sources */,
+				43AAA3D81372CAA80030E63E /* DataItem.m in Sources */,
+				43AAA3E21372CCD80030E63E /* NSManagedObject+NMInstantiation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

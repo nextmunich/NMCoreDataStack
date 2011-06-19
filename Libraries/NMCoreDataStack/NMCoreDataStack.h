@@ -34,10 +34,9 @@
  * class. Therefore, after a save, the main thread's context and any fetches
  * will make use of the new (saved) state.
  *
- * The Core Data stack can optionally be initialized based on an existing
- * SQLite database and with other bundles than the main bundle. If initialized
- * using the -init method, the NSManagedObjectModel will be created based on the
- * model files in the app's main bundle and with an empty database.
+ * If a persistent database is used, it will be initialized with the
+ * auto-migration policy enabled to allow for automatic evolvement of the
+ * underlying database schema.
  */
 @interface NMCoreDataStack : NSObject {
 
@@ -55,26 +54,16 @@
 #pragma mark Initialization
 
 /**
- * Initializes the Core Data stack using the models found in the main bundle and
- * with an empty database.
- */
-- (id)init;
-
-/**
- * Initializes the Core Data stack using the models found in the given bundles
- * and an empty database.
- */
-- (id)initWithModelBundles:(NSArray *)bundles;
-
-/**
  * Initializes the Core Data stack using the models found in the app's main
- * bundle and based on the SQLite database located at the given URL.
+ * bundle and based on the SQLite database located at the given URL. An empty
+ * database will be created in case no database exists at the given URL.
  */
 - (id)initWithDatabaseURL:(NSURL *)url;
 
 /**
  * Initializes the Core Data stack using the models found in the given bundles
- * and based on the SQLite database located at the given URL.
+ * and based on the SQLite database located at the given URL. An empty
+ * database will be created in case no database exists at the given URL.
  */
 - (id)initWithModelBundles:(NSArray *)bundles databaseURL:(NSURL *)url;
 
@@ -87,14 +76,6 @@
 - (NSManagedObjectContext *)mainThreadContext;
 
 
-#pragma mark Retrieving Entity Descriptions
-
-/**
- * Returns the NSEntityDescription for the entity with the given name defined in
- * the main thread's NSManagedObjectContext.
- */
-- (NSEntityDescription *)entityDescriptionForName:(NSString *)name;
-
 
 #pragma mark Fetching
 
@@ -103,8 +84,8 @@
 
 /**
  * Performs the given NSFetchRequest on a background thread (thus not blocking the
- * main thread), calling the FetchDelegate on the main thread when the fetch is
- * complete.
+ * main thread), calling the NMCoreDataFetchDelegate on the main thread when the
+ * fetch is complete.
  *
  * Any NSManagedObject returned as the fetch result has been loaded into the
  * main thread's NSManagedObjectContext and can thus be used in UI operations.
@@ -113,13 +94,15 @@
 
 /**
  * Performs a fetch using the template with the given name and substitution
- * variables on a background thread, calling the FetchDelegate on the main
- * thread when the fetch is complete.
+ * variables on a background thread, calling the NMCoreDataFetchDelegate on the
+ * main thread when the fetch is complete.
  *
  * Any NSManagedObject returned as the fetch result has been loaded into the
  * main thread's NSManagedObjectContext and can thus be used in UI operations.
  */
-- (void)fetchTemplateInBackground:(NSString *)templateName withVariables:(NSDictionary *)variables notifyingDelegateOnMainThread:(id<NMCoreDataFetchDelegate>)delegate;
+- (void)fetchTemplateInBackground:(NSString *)templateName
+					withVariables:(NSDictionary *)variables
+	notifyingDelegateOnMainThread:(id<NMCoreDataFetchDelegate>)delegate;
 
 /**
  * Cancels any pending fetches.
@@ -137,10 +120,22 @@
 /**
  * Calls the workers -performWorkWithManager:context: method on a background
  * thread and, once the worker has completed its job, notifies the
- * WorkerDelegate of the completed job on the main thread.
+ * NMCoreDataWorkerDelegate of the completed job on the main thread.
  */
 - (void)performWorkerInBackground:(id<NMCoreDataWorker>)worker
 	notifyingDelegateOnMainThread:(id<NMCoreDataWorkerDelegate>)delegate;
+
+
+
+#pragma mark Utilities
+
+/**
+ * Returns the NSEntityDescription for the entity with the given name defined in
+ * the main thread's NSManagedObjectContext.
+ */
+- (NSEntityDescription *)entityDescriptionForName:(NSString *)name;
+
+- (NSFetchRequest *)fetchRequestForTemplate:(NSString *)templateName withVariables:(NSDictionary *)variables;
 
 @end
 
@@ -156,12 +151,12 @@
 
 /**
  * Called on a background thread with a valid NSManagedObjectContext on which
- * the CoreDataWorker can now perform its job.
+ * the NMCoreDataWorker can now perform its job.
  *
  * Any saves done to the NSManagedObjectContext will be broadcasted to the main
  * thread's and any other open context.
  *
- * \param manager The CoreDataManager in which the worker executes.
+ * \param manager The NMCoreDataStack in which the worker executes.
  * \param context The NSManagedObjectContext in which the worker can safely
  *				  perform its work.
  */
@@ -203,14 +198,14 @@
 #pragma mark Worker Delegate
 
 /**
- * Delegate protocol for listening for completion of a CoreDataWorker's work.
+ * Delegate protocol for listening for completion of a NMCoreDataWorker's work.
  */
 @protocol NMCoreDataWorkerDelegate
 
 /**
  * Called once the worker did complete.
  *
- * \param worker The CoreDataWorker which completed its job.
+ * \param worker The NMCoreDataWorker which completed its job.
  */
 - (void)workerDidFinish:(id<NMCoreDataWorker>)worker;
 

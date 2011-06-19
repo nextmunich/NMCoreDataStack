@@ -1,5 +1,5 @@
 //
-//  DataItem.h
+//  NSManagedObject+NMInstantiation.h
 //  NMCoreDataStack
 //
 //  Created by Benjamin Broll on 05.05.11.
@@ -9,12 +9,8 @@
 #import <CoreData/CoreData.h>
 
 
-@interface DataItem :  NSManagedObject  
-{
-}
+@interface NSManagedObject (NMInstantiation)
 
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * content;
++ (id)newObjectInContext:(NSManagedObjectContext *)ctx;
 
 @end
-

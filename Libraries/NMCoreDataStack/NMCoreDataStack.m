@@ -81,6 +81,13 @@ NSString* const AdditionalContextsSynchronizationString = @"AdditionalContextsSy
 }
 
 
+#pragma mark Utilities
+
+- (NSFetchRequest *)fetchRequestForTemplate:(NSString *)templateName withVariables:(NSDictionary *)variables {
+	return [managedObjectModel fetchRequestFromTemplateWithName:templateName substitutionVariables:variables];
+}
+
+
 #pragma mark Accessing Contexts
 
 - (NSManagedObjectContext *)mainThreadContext {
@@ -158,7 +165,10 @@ NSString* const AdditionalContextsSynchronizationString = @"AdditionalContextsSy
 	if (url != nil) {
 		NSError *error = nil;
 		
-		if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
+		NSMutableDictionary *optionsDictionary = [NSMutableDictionary dictionary];
+		[optionsDictionary setObject:[NSNumber numberWithBool:YES] forKey:NSMigratePersistentStoresAutomaticallyOption];
+		
+		if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:optionsDictionary error:&error]) {
 			// Handle the error.
 			NSLog(@"COREDATA / WARN: persistentStoreCoordinator error: %@", error);
 		} 
@@ -192,14 +202,6 @@ NSString* const AdditionalContextsSynchronizationString = @"AdditionalContextsSy
 
 
 #pragma mark Init & Dealloc
-
-- (id)init {
-	return [self initWithModelBundles:nil databaseURL:nil];
-}
-
-- (id)initWithModelBundles:(NSArray *)bundles {
-	return [self initWithModelBundles:bundles databaseURL:nil];
-}
 
 - (id)initWithDatabaseURL:(NSURL *)url {
 	return [self initWithModelBundles:nil databaseURL:url];
